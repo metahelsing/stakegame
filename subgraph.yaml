@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: EldaruneStakeGame
+    network: goerli
+    source:
+      address: "0xBDC49a01dDbF78d293B3CDd33A2298861777196e"
+      abi: EldaruneStakeGame
+      startBlock: 9916106
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Mission
+        - Reward
+        - Requirement
+        - MissionSubscribe
+        - MissionSubscribeHistory
+      abis:
+        - name: EldaruneStakeGame
+          file: ./abis/EldaruneStakeGame.json
+      eventHandlers:
+        - event: SaveMission(uint256,uint256,uint256,string,(address,uint256,uint256)[],(address,uint256,uint256,uint256)[])
+          handler: handleSaveMission
+        - event: StartMission(indexed address,uint256,indexed uint256,uint256,(uint256,uint256,uint256,string,(address,uint256,uint256)[],(address,uint256,uint256,uint256)[]))
+          handler: handleStartMission
+        - event: EndMission(indexed address,uint256,indexed uint256,(uint256,uint256,uint256,string,(address,uint256,uint256)[],(address,uint256,uint256,uint256)[]))
+          handler: handleEndMission
+      file: ./src/eldarune-stake-game.ts

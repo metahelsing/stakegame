@@ -1,0 +1,49 @@
+type Mission @entity {
+  id: ID!
+  missionId: BigInt!
+  blockCount: BigInt!
+  numberOfRepetitions: BigInt!
+  missionUrl: String!
+  rewards: [Reward!] @derivedFrom(field: "mission")
+  requirements: [Requirement!] @derivedFrom(field: "mission")
+}
+
+type Reward @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  tokenId: BigInt!
+  amount: BigInt!
+  mission: Mission!
+}
+
+type Requirement @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  tokenId: BigInt!
+  amount: BigInt!
+  burnRate: BigInt!
+  mission: Mission!
+}
+
+type MissionSubscribe @entity {
+  id: ID!
+  walletAddress: Bytes!
+  startBlock: BigInt!
+  endBlock: BigInt!
+  startDate: BigInt!
+  mission: Mission!
+  active: Boolean!
+}
+
+type MissionSubscribeHistory @entity {
+  id: ID!
+  walletAddress: Bytes!
+  subscribeId: BigInt!
+  startBlock: BigInt!
+  endBlock: BigInt!
+  startDate: BigInt!
+  endDate: BigInt
+  missionId: BigInt!
+  blockExplorerUrl: String!
+  active: Boolean!
+}

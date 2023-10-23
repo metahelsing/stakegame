@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "EldaruneStakeGame": {
+      "address": "0xBDC49a01dDbF78d293B3CDd33A2298861777196e",
+      "startBlock": 9916106
+    }
+  }
+}
